@@ -34,6 +34,10 @@ public class EmployeeDAO implements IEmployeeDAO{
 
     @Override
     public void deleteById(int id) {
-        entityManager.remove(this.findById(id));
+        Employee theEmployee = this.findById(id);
+        if(theEmployee == null){
+            throw new RuntimeException("Employee not found with id - " + id);
+        }
+        entityManager.remove(theEmployee);
     }
 }
